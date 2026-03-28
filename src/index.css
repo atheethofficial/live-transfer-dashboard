@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-black text-white;
+  }
+}
+
+.orka-grid {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.orka-glow {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
+}
+.orka-glow-strong {
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
+}
