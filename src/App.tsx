@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Calendar, Activity, Users, PhoneCall, Hash, PhoneForwarded, CheckCircle, XCircle, Clock, AlertTriangle, Layers } from 'lucide-react';
+import { useState } from 'react';
+import { Calendar, Activity, Users, PhoneCall, Hash, CalendarCheck, CheckCircle, XCircle, Clock, AlertTriangle, Layers } from 'lucide-react';
 import { DateRangePicker } from './components/DateRangePicker';
 import { useDashboardMetrics } from './hooks/useDashboardMetrics';
 import { subDays } from 'date-fns';
@@ -33,7 +33,7 @@ function App() {
             <Layers className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-3xl font-extrabold tracking-tight text-white mb-0.5">Live Transfer Analytics</h1>
+            <h1 className="text-3xl font-extrabold tracking-tight text-white mb-0.5">Appointment Setting Dashboard</h1>
             <p className="text-blue-400 text-sm font-medium">Orka Growth Infrastructure</p>
           </div>
         </div>
@@ -63,9 +63,9 @@ function App() {
             <StatCard label="Call Back Req" value={data.generic.callbackRequested.toLocaleString()} icon={PhoneCall} color="text-blue-200" bg="bg-blue-900/20" />
             <StatCard label="Qualified" value={data.generic.qualified.toLocaleString()} icon={CheckCircle} color="text-blue-400" bg="bg-blue-500/10" glow />
             
-            <StatCard label="Transferred" value={data.generic.transferred.toLocaleString()} icon={PhoneForwarded} color="text-white" bg="bg-blue-600" glow />
+            <StatCard label="Appointments Booked" value={data.generic.appointmentBooked.toLocaleString()} icon={CalendarCheck} color="text-white" bg="bg-blue-600" glow />
             <StatCard label="Pickup Rate" value={`${data.generic.pickupRate}%`} icon={Activity} color="text-blue-300" bg="bg-[#111]" />
-            <StatCard label="Transfer Rate" value={`${data.generic.transferRate}%`} icon={Activity} color="text-blue-400" bg="bg-[#111]" />
+            <StatCard label="Appt. Booking Rate" value={`${data.generic.appointmentBookingRate}%`} icon={Activity} color="text-blue-400" bg="bg-[#111]" />
             <StatCard label="Not Int. Rate" value={`${data.generic.notInterestedRate}%`} icon={Activity} color="text-slate-400" bg="bg-[#111]" />
           </div>
         </section>
@@ -74,18 +74,22 @@ function App() {
         <section className="space-y-4">
           <div className="flex items-center gap-2 mb-2">
             <Layers className="w-5 h-5 text-blue-500" />
-            <h2 className="text-xl font-bold text-white tracking-tight">AI Agent Specific Metrics</h2>
+            <h2 className="text-xl font-bold text-white tracking-tight">AI Agent Funnel Metrics</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <StatCard label="Hook Engaged" value={data.agent.hookEngaged.toLocaleString()} icon={Users} color="text-slate-300" bg="bg-[#111]" />
-            <StatCard label="Intent Engaged" value={data.agent.intentEngaged.toLocaleString()} icon={Users} color="text-blue-300" bg="bg-blue-900/20" />
-            <StatCard label="Transfer Engaged" value={data.agent.transferEngaged.toLocaleString()} icon={PhoneForwarded} color="text-blue-400" bg="bg-blue-800/20" glow />
-            <StatCard label="Objection Engaged" value={data.agent.objectionEngaged.toLocaleString()} icon={AlertTriangle} color="text-slate-400" bg="bg-[#111]" />
-            
+            <StatCard label="Hook Objection Engaged" value={data.agent.hookObjectionEngaged.toLocaleString()} icon={AlertTriangle} color="text-slate-400" bg="bg-[#111]" />
             <StatCard label="Hook Rate" value={`${data.agent.hookRate}%`} icon={Activity} color="text-slate-300" bg="bg-[#111]" />
-            <StatCard label="Hook -> Intent Rate" value={`${data.agent.hookToIntentRate}%`} icon={Activity} color="text-blue-200" bg="bg-[#111]" />
-            <StatCard label="Intent -> Trans. Rate" value={`${data.agent.intentToTransferRate}%`} icon={Activity} color="text-blue-400" bg="bg-blue-900/20" />
-            <StatCard label="Trans. Completion" value={`${data.agent.transferCompletionRate}%`} icon={CheckCircle} color="text-white" bg="bg-blue-600/50" glow />
+
+            <StatCard label="Value Engaged" value={data.agent.valueEngaged.toLocaleString()} icon={Users} color="text-blue-300" bg="bg-blue-900/20" />
+            <StatCard label="Value Objection Engaged" value={data.agent.valueObjectionEngaged.toLocaleString()} icon={AlertTriangle} color="text-slate-400" bg="bg-[#111]" />
+            <StatCard label="Hook -> Value Rate" value={`${data.agent.hookToValueRate}%`} icon={Activity} color="text-blue-200" bg="bg-[#111]" />
+
+            <StatCard label="Appointment Agent Engaged" value={data.agent.appointmentAgentEngaged.toLocaleString()} icon={CalendarCheck} color="text-blue-400" bg="bg-blue-800/20" glow />
+            <StatCard label="Appointment Objection Engaged" value={data.agent.appointmentObjectionEngaged.toLocaleString()} icon={AlertTriangle} color="text-slate-400" bg="bg-[#111]" />
+            <StatCard label="Value -> Appt. Rate" value={`${data.agent.valueToAppointmentRate}%`} icon={Activity} color="text-blue-400" bg="bg-blue-900/20" />
+
+            <StatCard label="Appt. Completion Rate" value={`${data.agent.appointmentCompletionRate}%`} icon={CheckCircle} color="text-white" bg="bg-blue-600/50" glow />
           </div>
         </section>
 
@@ -147,17 +151,21 @@ function App() {
                     <th className="px-6 py-3 font-semibold tracking-wider">Client</th>
                     <th className="px-6 py-3 font-semibold tracking-wider">Duration</th>
                     <th className="px-6 py-3 font-semibold tracking-wider">Outcome</th>
+                    <th className="px-6 py-3 font-semibold tracking-wider">Appointment</th>
                     <th className="px-6 py-3 font-semibold tracking-wider">Status</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/5">
-                  {loading ? <tr><td colSpan={5} className="px-6 py-8 text-center text-slate-500">Loading calls...</td></tr> : 
+                  {loading ? <tr><td colSpan={6} className="px-6 py-8 text-center text-slate-500">Loading calls...</td></tr> :
                     data.calls.map((c: any, idx: number) => (
                     <tr key={idx} className="hover:bg-[#111] transition-colors">
                       <td className="px-6 py-3 font-mono text-xs text-slate-500">{c.call_id?.substring(0,8) || c.id?.substring(0,8)}</td>
                       <td className="px-6 py-3">{c.client || '-'}</td>
                       <td className="px-6 py-3 text-slate-400">{c.duration_sec || 0}s</td>
                       <td className="px-6 py-3 font-medium text-white">{c.outcome || '-'}</td>
+                      <td className="px-6 py-3 text-slate-400">
+                        {c.appointment_date ? `${c.appointment_date} ${c.appointment_time || ''}`.trim() : '-'}
+                      </td>
                       <td className="px-6 py-3">
                         <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${c.status === 'completed' ? 'bg-blue-500/10 text-blue-400' : 'bg-slate-800/50 text-slate-400'}`}>
                           {c.status || 'unknown'}

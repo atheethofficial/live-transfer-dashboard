@@ -16,6 +16,10 @@ export type Database = {
     Tables: {
       calls: {
         Row: {
+          appointment_agent_engaged: boolean | null
+          appointment_date: string | null
+          appointment_objection_engaged: boolean | null
+          appointment_time: string | null
           attempt_num: number | null
           call_cost: number | null
           call_end: string | null
@@ -34,21 +38,21 @@ export type Database = {
           followup_day: number | null
           full_name: string | null
           hook_agent_engaged: boolean | null
+          hook_objection_engaged: boolean | null
           hook_outcome: string | null
           id: string
-          intent_agent_engaged: boolean | null
           intent_level: string | null
-          intent_outcome: string | null
           is_terminal: boolean | null
           key_objections: Json | null
-          objection_agent_engaged: boolean | null
           objection_resolved: boolean | null
+          opening_variant_used: string | null
           outcome: string | null
           outcome_tag: string | null
           phone: string | null
           pipeline_stage: string | null
           prospect_interest: string | null
           recording_url: string | null
+          savings_amount_presented: string | null
           sentiment: string | null
           squad_id: string | null
           status: string | null
@@ -57,14 +61,16 @@ export type Database = {
           success_eval_reason: string | null
           summary: string | null
           transcript: string | null
-          transfer_agent_engaged: boolean | null
-          transfer_attempted: boolean | null
-          transfer_completed: boolean | null
-          transfer_outcome: string | null
-          transfer_target: string | null
+          value_agent_engaged: boolean | null
+          value_objection_engaged: boolean | null
+          value_outcome: string | null
           within_calling_hours: boolean | null
         }
         Insert: {
+          appointment_agent_engaged?: boolean | null
+          appointment_date?: string | null
+          appointment_objection_engaged?: boolean | null
+          appointment_time?: string | null
           attempt_num?: number | null
           call_cost?: number | null
           call_end?: string | null
@@ -83,21 +89,21 @@ export type Database = {
           followup_day?: number | null
           full_name?: string | null
           hook_agent_engaged?: boolean | null
+          hook_objection_engaged?: boolean | null
           hook_outcome?: string | null
           id?: string
-          intent_agent_engaged?: boolean | null
           intent_level?: string | null
-          intent_outcome?: string | null
           is_terminal?: boolean | null
           key_objections?: Json | null
-          objection_agent_engaged?: boolean | null
           objection_resolved?: boolean | null
+          opening_variant_used?: string | null
           outcome?: string | null
           outcome_tag?: string | null
           phone?: string | null
           pipeline_stage?: string | null
           prospect_interest?: string | null
           recording_url?: string | null
+          savings_amount_presented?: string | null
           sentiment?: string | null
           squad_id?: string | null
           status?: string | null
@@ -106,14 +112,16 @@ export type Database = {
           success_eval_reason?: string | null
           summary?: string | null
           transcript?: string | null
-          transfer_agent_engaged?: boolean | null
-          transfer_attempted?: boolean | null
-          transfer_completed?: boolean | null
-          transfer_outcome?: string | null
-          transfer_target?: string | null
+          value_agent_engaged?: boolean | null
+          value_objection_engaged?: boolean | null
+          value_outcome?: string | null
           within_calling_hours?: boolean | null
         }
         Update: {
+          appointment_agent_engaged?: boolean | null
+          appointment_date?: string | null
+          appointment_objection_engaged?: boolean | null
+          appointment_time?: string | null
           attempt_num?: number | null
           call_cost?: number | null
           call_end?: string | null
@@ -132,21 +140,21 @@ export type Database = {
           followup_day?: number | null
           full_name?: string | null
           hook_agent_engaged?: boolean | null
+          hook_objection_engaged?: boolean | null
           hook_outcome?: string | null
           id?: string
-          intent_agent_engaged?: boolean | null
           intent_level?: string | null
-          intent_outcome?: string | null
           is_terminal?: boolean | null
           key_objections?: Json | null
-          objection_agent_engaged?: boolean | null
           objection_resolved?: boolean | null
+          opening_variant_used?: string | null
           outcome?: string | null
           outcome_tag?: string | null
           phone?: string | null
           pipeline_stage?: string | null
           prospect_interest?: string | null
           recording_url?: string | null
+          savings_amount_presented?: string | null
           sentiment?: string | null
           squad_id?: string | null
           status?: string | null
@@ -155,11 +163,9 @@ export type Database = {
           success_eval_reason?: string | null
           summary?: string | null
           transcript?: string | null
-          transfer_agent_engaged?: boolean | null
-          transfer_attempted?: boolean | null
-          transfer_completed?: boolean | null
-          transfer_outcome?: string | null
-          transfer_target?: string | null
+          value_agent_engaged?: boolean | null
+          value_objection_engaged?: boolean | null
+          value_outcome?: string | null
           within_calling_hours?: boolean | null
         }
         Relationships: []

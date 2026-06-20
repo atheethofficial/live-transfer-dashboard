@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface DateRangePickerProps {
   startDate: Date;
   endDate: Date;
